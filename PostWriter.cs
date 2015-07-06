@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -55,14 +56,15 @@ namespace OrchardToMarkdown
             var tags = post.TagsPart.Tags.Split(',').Select(x => x.Trim());
             var categories = string.Join(" ", tags);
             var date = DateTime.Parse(post.CommonPart.PublishedUtc);
-            var author = post.CommonPart.Owner;
+			var author = post.CommonPart.Owner.Replace(@"/User.UserName=", "");
             var title = post.TitlePart.Title;
             var route = post.AutoroutePart.Alias;
 
             writer.WriteLine("---");
             writer.WriteLine("layout: post");
-            writer.WriteLine("title: \"{0}\"", post.TitlePart.Title);
-            writer.WriteLine("date: {0}", post.CommonPart.PublishedUtc);
+            writer.WriteLine("title: \"{0}\"", title);
+			writer.WriteLine("author: \"{0}\"", author);
+            writer.WriteLine("date: {0}", date.ToString("yyyy-MM-dd HH:mm:ss"));
             writer.WriteLine("categories: {0}", categories);
             writer.WriteLine("---");
         }

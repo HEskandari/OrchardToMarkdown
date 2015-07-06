@@ -9,7 +9,7 @@ namespace OrchardToMarkdown
         {
             SimpleConfigurator.ConfigureForConsoleLogging();
 
-            var file = new FileInfo(@"C:\Users\Hadi\Dropbox\NewSite\posts export.xml");
+			var file = new FileInfo(@"C:\Dropbox\Dropbox\NewSite\posts export.xml");
             var converter = new MarkdownConverter();
 
             converter.Convert(file);
